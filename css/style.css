@@ -13,6 +13,8 @@
   --footer-background: #2f303a;
   --footer-developed-text: rgba(255, 255, 255, 0.4);
 
+  --transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+
   box-sizing: border-box;
 }
 
@@ -73,6 +75,11 @@ address {
 .hidden {
   display: none;
 }
+/* :hover,
+:focus {
+  transition-duration: 250ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+} */
 
 /*------------- Шапка и подвал ---------- */
 /* header */
@@ -93,12 +100,36 @@ address {
 
 .nav-site {
   margin-left: 85px;
-  margin-top: 32px;
 }
 
 .nav-site .link {
   display: inline-block;
-  padding-bottom: 32px;
+  line-height: 80px;
+
+  position: relative;
+}
+
+.nav-site .link::after {
+  content: "";
+  width: 100%;
+  height: 4px;
+  background: var(--accent-color);
+  border-radius: 2px;
+
+  bottom: 0;
+  left: 0;
+
+  position: absolute;
+
+  transform: scale(0);
+  transition-property: transform;
+  transition-duration: 250ms;
+  transition-timing-function: var(--transition-timing-function);
+}
+
+.nav-site .link:hover:after,
+.nav-site .link:focus:after {
+  transform: scale(1);
 }
 
 .nav-site .item + .item {
@@ -184,8 +215,12 @@ address {
 .header .current {
   color: var(--accent-color);
 }
+.header .current::after {
+  transform: scale(1);
+}
 
 /* Наведение */
+
 .header .link:focus,
 .header .link:hover,
 .footer .logo:focus,
@@ -367,13 +402,25 @@ address {
 /* Чем мы занимаемся */
 .directions .link {
   color: var(--white-color);
-  background-color: var(--background-white-text);
   text-transform: uppercase;
   text-align: center;
 
-  /* ВРЕМЕННО СМЕСТИЛ */
+  position: relative;
   display: flex;
-  flex-direction: column;
+}
+
+.directions .text-container {
+  position: absolute;
+  background-color: var(--background-white-text);
+  width: 100%;
+  height: 70px;
+  bottom: 0;
+}
+
+.directions .text {
+  display: flex;
+  justify-content: center;
+  padding: 27px 0px;
 }
 
 /* Наша команда */
@@ -433,33 +480,74 @@ address {
   margin-left: 8px;
 }
 
+@keyframes overlay {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(-100%);
+  }
+}
+
+.project-img {
+  position: relative;
+  overflow: hidden;
+}
+
+.description-container {
+  background-color: var(--background-high-accent);
+
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  transform: translateY(-100%);
+  opacity: 0;
+}
+
+.description-container:hover {
+  animation-name: overlay;
+  animation-duration: 250ms;
+  animation-timing-function: var(--transition-timing-function);
+  animation-fill-mode: forwards;
+}
+
+.projects .description {
+  color: var(--white-color);
+  font-size: 18px;
+  line-height: 1.56;
+
+  padding: 63px 24px;
+}
+
 .projects h2 {
   font-size: 18px;
   line-height: 2;
   letter-spacing: 0.06em;
 
-  margin: 20px 24px 4px;
+  padding: 20px 24px 4px;
 }
 .projects .text {
   color: var(--text-normal-color);
   font-size: 16px;
   line-height: 1.87;
 
-  margin: 0px 24px 20px;
-}
-.projects .description {
-  color: var(--white-color);
-  background-color: var(--background-high-accent);
-
-  font-size: 18px;
-  line-height: 1.56;
+  padding: 0px 24px 20px;
 }
 
 .projects .item {
   width: 370px;
 
   background: var(--white-color);
-  border: 1px solid #eeeeee;
+  line-height: 0;
+  /* border: 1px solid #eeeeee; */
+}
+
+.projects .border {
+  outline: 1px solid #eeeeee;
+  width: calc(100% - 2px);
+  margin: auto;
 }
 
 .projects .item {
