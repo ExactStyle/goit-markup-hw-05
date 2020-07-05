@@ -96,6 +96,8 @@ address {
   font-weight: 500;
   line-height: 1.14;
   letter-spacing: 0.02em;
+
+  transition: color 250ms var(--transition-timing-function);
 }
 
 .nav-site {
@@ -183,6 +185,8 @@ address {
 .footer .logo,
 .footer .address {
   color: var(--white-color);
+
+  transition: color 250ms var(--transition-timing-function);
 }
 .footer .text {
   color: var(--white-color);
@@ -192,6 +196,8 @@ address {
 }
 .address > .link {
   color: var(--footer-address-color);
+
+  transition: color 250ms var(--transition-timing-function);
 }
 
 .footer-join .text {
@@ -308,6 +314,8 @@ address {
 
 .social-icon {
   fill: inherit;
+
+  transition: fill 250ms var(--transition-timing-function);
 }
 
 .team .social-item {
@@ -372,6 +380,9 @@ address {
 
   padding: 10px 32px;
   border-radius: 4px;
+
+  transition: color 250ms var(--transition-timing-function),
+    background-color 250ms var(--transition-timing-function);
 }
 
 .hero .link:focus,
@@ -400,7 +411,7 @@ address {
 }
 
 /* Чем мы занимаемся */
-.directions .link {
+.directions .item {
   color: var(--white-color);
   text-transform: uppercase;
   text-align: center;
@@ -453,6 +464,9 @@ address {
   align-items: center;
   border: 1px solid var(--main-icons);
   border-radius: 4px;
+
+  transition: fill 250ms var(--transition-timing-function),
+    border-color 250ms var(--transition-timing-function);
 }
 
 .client-icon {
@@ -478,39 +492,6 @@ address {
 
 .filter-container .filter + .filter {
   margin-left: 8px;
-}
-
-@keyframes overlay {
-  from {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(-100%);
-  }
-}
-
-.project-img {
-  position: relative;
-  overflow: hidden;
-}
-
-.description-container {
-  background-color: var(--background-high-accent);
-
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  transform: translateY(-100%);
-  opacity: 0;
-}
-
-.description-container:hover {
-  animation-name: overlay;
-  animation-duration: 250ms;
-  animation-timing-function: var(--transition-timing-function);
-  animation-fill-mode: forwards;
 }
 
 .projects .description {
@@ -543,6 +524,10 @@ address {
   line-height: 0;
   /* border: 1px solid #eeeeee; */
 }
+.projects .item:hover {
+  box-shadow: 1px 4px 6px rgba(0, 0, 0, 0.16), 0px 4px 4px rgba(0, 0, 0, 0.06),
+    0px 1px 1px rgba(0, 0, 0, 0.12);
+}
 
 .projects .border {
   outline: 1px solid #eeeeee;
@@ -558,13 +543,35 @@ address {
   margin-right: 30px;
 }
 
+.project-img {
+  position: relative;
+  overflow: hidden;
+}
+
+.description-container {
+  background-color: var(--background-high-accent);
+
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  transition: transform 250ms var(--transition-timing-function);
+}
+
+.project-img:hover .description-container {
+  transform: translateY(-100%);
+}
 /* Кнопки наши проекты */
 .button {
   color: var(--text-bold-color);
   background-color: var(--background-accent);
+  box-shadow: none;
 
   padding: 6px 22px;
   border-radius: 4px;
+
+  transition: color 250ms var(--transition-timing-function),
+    background-color 250ms var(--transition-timing-function),
+    box-shadow 250ms var(--transition-timing-function);
 }
 .button:focus,
 .button:hover {
